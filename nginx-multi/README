@@ -1,0 +1,28 @@
+
+# INSTALLER LE CHART HELM
+helm install nginx-multi ./nginx-multi
+
+
+# TESTER 
+kubectl get pods -A | grep nginx
+
+
+# TESTER LE LBA
+curl -H "Host: nginx-a.local" http://<LB-A-IP>
+
+# TESTER LE LBA 
+curl -H "Host: nginx-b.local" http://<LB-B-IP>
+
+
+TEST D'ISOLATION
+curl -H "Host: nginx-b.local" http://<LB-A-IP>
+curl -H "Host: nginx-a.local" http://<LB-B-IP>
+
+# verifier le controller A
+kubectl logs -n namespace-a deploy/ingress-a-ingress-nginx-controller
+
+#          le controller b
+kubectl logs -n namespace-b deploy/ingress-b-ingress-nginx-controller
+
+
+

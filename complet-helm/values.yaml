@@ -1,0 +1,14 @@
+namespace: namespace-a
+
+image:
+  repository: nginx
+  tag: latest
+
+service:
+  port: 80
+
+ingress:
+  enabled: true
+  className: nginx-a
+  host: nginx-a.local
+  path: /

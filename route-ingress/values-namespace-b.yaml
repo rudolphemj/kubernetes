@@ -1,0 +1,33 @@
+controller:
+  name: controller-b
+
+  ingressClassResource:
+    name: nginx-b
+    enabled: true
+    default: false
+    controllerValue: "k8s.io/ingress-nginx-b"
+
+  ingressClass: nginx-b
+
+  watchNamespace: "namespace-b"
+
+  electionID: "ingress-controller-leader-b"
+
+  replicaCount: 1
+
+  service:
+    type: LoadBalancer
+    externalTrafficPolicy: Local  # optionnel (IP client réelle)
+
+  admissionWebhooks:
+    enabled: true
+
+  extraArgs:
+    ingress-class: nginx-b
+    controller-class: k8s.io/ingress-nginx-b
+
+rbac:
+  create: true
+
+serviceAccount:
+  create: true

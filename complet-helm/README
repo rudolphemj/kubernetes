@@ -1,0 +1,32 @@
+
+
+# INSTALLATION
+
+kubectl create namespace namespace-a
+
+helm install nginx-test ./nginx-test -n namespace-a
+
+
+
+# VERIFICATION 
+
+kubectl get pods -n namespace-a
+
+kubectl get svc -n namespace-a
+
+kubectl get ingress -n namespace-a
+
+
+curl -H "Host: nginx-a.local" http://<EXTERNAL-IP>
+
+
+# TEST DNS INTERNE
+kubectl run curl-test --rm -it --image=curlimages/curl -n namespace-a -- sh
+curl nginx-test
+
+
+# TEST INGRESS CONTROLLER
+kubectl logs -n namespace-a deploy/ingress-a-ingress-nginx-controller
+
+
+

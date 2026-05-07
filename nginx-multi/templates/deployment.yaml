@@ -1,0 +1,30 @@
+{{- range .Values.namespaces }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-{{ .name }}
+  namespace: {{ .name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-{{ .name }}
+  template:
+    metadata:
+      labels:
+        app: nginx-{{ .name }}
+    spec:
+      containers:
+        - name: nginx
+          image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag }}"
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: html
+              mountPath: /usr/share/nginx/html
+      volumes:
+        - name: html
+          configMap:
+            name: nginx-html-{{ .name }}
+---
+{{- end }}

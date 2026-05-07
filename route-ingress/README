@@ -1,0 +1,29 @@
+
+# Ajouter le repo HELM
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm repo update
+
+
+# Déployer le controller dans son namespace
+kubectl create namespace namespace-a
+
+helm install ingress-a ingress-nginx/ingress-nginx \
+  -n namespace-a \
+  -f values-namespace-a.yaml
+
+
+# Vérifier 
+kubectl get pods -n namespace-a
+kubectl get svc -n namespace-a
+kubectl get ingressclass
+
+=================================
+
+pour la deuxieme stack
+
+kubectl create namespace namespace-b
+
+helm install ingress-b ingress-nginx/ingress-nginx \
+  -n namespace-b \
+  -f values-namespace-b.yaml
+=======================================

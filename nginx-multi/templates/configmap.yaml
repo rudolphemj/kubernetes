@@ -1,0 +1,11 @@
+{{- range .Values.namespaces }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-html-{{ .name }}
+  namespace: {{ .name }}
+data:
+  index.html: |
+    <h1>{{ .message }}</h1>
+---
+{{- end }}

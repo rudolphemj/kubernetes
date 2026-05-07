@@ -1,0 +1,17 @@
+namespaces:
+  - name: namespace-a
+    ingressClass: nginx-a
+    host: nginx-a.local
+    message: "Hello from namespace A ✅"
+
+  - name: namespace-b
+    ingressClass: nginx-b
+    host: nginx-b.local
+    message: "Hello from namespace B ✅"
+
+image:
+  repository: nginx
+  tag: latest
+
+service:
+  port: 80
