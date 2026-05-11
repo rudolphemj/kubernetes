@@ -1,0 +1,5 @@
+helm install nginx-a ./nginx-a --debug
+
+
+# kubectl get pods -n ns-a
+# kubectl get svc -n ns-a

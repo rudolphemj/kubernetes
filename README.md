@@ -32,6 +32,10 @@ k delete deployment my-first-deployment
 
 
 
+\# delete tout dans un namespace
+
+k delete all --all -n <namspace>
+
 ================================================================
 
 
@@ -75,6 +79,40 @@ kubectl -n kubernetes-dashboard create token admin-user
 
 
 kubectl -n kubernetes-dashboard port-forward service/kubernetes-dashboard 9090:9090 --address 0.0.0.0
+
+
+
+========================================================================
+
+
+
+**# Créer l'arborescence chart**
+
+helm create app-chart
+
+
+
+**# desinstaller**
+
+helm uninstall app -n demo-ns
+
+
+
+**# verifier le chart**
+
+helm template <dossier> . -n <namspace>
+
+
+
+**# lister les Charts**
+
+helm list -A
+
+
+
+
+
+
 
 
 
