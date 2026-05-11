@@ -1,0 +1,28 @@
+# 2 Appli NGINX + 2 INGRESS-NGINX
+
+
+
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm repo update
+
+kubectl create namespace ns-a
+
+helm install ingress-a ingress-nginx/ingress-nginx \
+  -n ns-a \
+  --set controller.ingressClassResource.name=nginx-a \
+  --set controller.ingressClass=nginx-a \
+  --set controller.service.type=NodePort \
+  --set controller.service.nodePorts.http=30080
+
+
+kubectl create namespace ns-b
+
+helm install ingress-b ingress-nginx/ingress-nginx \
+  -n ns-b \
+  --set controller.ingressClassResource.name=nginx-b \
+  --set controller.ingressClass=nginx-b \
+  --set controller.service.type=NodePort \
+  --set controller.service.nodePorts.http=30081
+
+
+
